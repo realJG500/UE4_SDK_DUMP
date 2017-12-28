@@ -51404,11 +51404,11 @@ struct FPlane UKismetMathLibrary::STATIC_MakePlaneFromPointAndNormal(const class
 // int                            Day                            (CPF_Parm, CPF_ZeroConstructor, CPF_IsPlainOldData)
 // int                            Hour                           (CPF_Parm, CPF_ZeroConstructor, CPF_IsPlainOldData)
 // int                            Minute                         (CPF_Parm, CPF_ZeroConstructor, CPF_IsPlainOldData)
-// int                            Second                         (CPF_Parm, CPF_ZeroConstructor, CPF_IsPlainOldData)
+// int                            second                         (CPF_Parm, CPF_ZeroConstructor, CPF_IsPlainOldData)
 // int                            Millisecond                    (CPF_Parm, CPF_ZeroConstructor, CPF_IsPlainOldData)
 // struct FDateTime               ReturnValue                    (CPF_Parm, CPF_OutParm, CPF_ReturnParm)
 
-struct FDateTime UKismetMathLibrary::STATIC_MakeDateTime(int Year, int Month, int Day, int Hour, int Minute, int Second, int Millisecond)
+struct FDateTime UKismetMathLibrary::STATIC_MakeDateTime(int Year, int Month, int Day, int Hour, int Minute, int second, int Millisecond)
 {
 	static auto fn = UObject::FindObject<UFunction>("Function Engine.KismetMathLibrary.MakeDateTime");
 
@@ -51418,7 +51418,7 @@ struct FDateTime UKismetMathLibrary::STATIC_MakeDateTime(int Year, int Month, in
 	params.Day = Day;
 	params.Hour = Hour;
 	params.Minute = Minute;
-	params.Second = Second;
+	params.second = second;
 	params.Millisecond = Millisecond;
 
 	auto flags = fn->FunctionFlags;
@@ -56223,10 +56223,10 @@ void UKismetMathLibrary::STATIC_BreakRandomStream(const struct FRandomStream& In
 // int                            Day                            (CPF_Parm, CPF_OutParm, CPF_ZeroConstructor, CPF_IsPlainOldData)
 // int                            Hour                           (CPF_Parm, CPF_OutParm, CPF_ZeroConstructor, CPF_IsPlainOldData)
 // int                            Minute                         (CPF_Parm, CPF_OutParm, CPF_ZeroConstructor, CPF_IsPlainOldData)
-// int                            Second                         (CPF_Parm, CPF_OutParm, CPF_ZeroConstructor, CPF_IsPlainOldData)
+// int                            second                         (CPF_Parm, CPF_OutParm, CPF_ZeroConstructor, CPF_IsPlainOldData)
 // int                            Millisecond                    (CPF_Parm, CPF_OutParm, CPF_ZeroConstructor, CPF_IsPlainOldData)
 
-void UKismetMathLibrary::STATIC_BreakDateTime(const struct FDateTime& InDateTime, int* Year, int* Month, int* Day, int* Hour, int* Minute, int* Second, int* Millisecond)
+void UKismetMathLibrary::STATIC_BreakDateTime(const struct FDateTime& InDateTime, int* Year, int* Month, int* Day, int* Hour, int* Minute, int* second, int* Millisecond)
 {
 	static auto fn = UObject::FindObject<UFunction>("Function Engine.KismetMathLibrary.BreakDateTime");
 
@@ -56250,8 +56250,8 @@ void UKismetMathLibrary::STATIC_BreakDateTime(const struct FDateTime& InDateTime
 		*Hour = params.Hour;
 	if (Minute != nullptr)
 		*Minute = params.Minute;
-	if (Second != nullptr)
-		*Second = params.Second;
+	if (second != nullptr)
+		*second = params.second;
 	if (Millisecond != nullptr)
 		*Millisecond = params.Millisecond;
 }

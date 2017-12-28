@@ -109,6 +109,15 @@ enum class ECastAnim
 };
 
 
+// Enum TslGame.EServerStatType
+enum class EServerStatType
+{
+	UE                             = 0,
+	NET                            = 1,
+	EServerStatType_MAX            = 2
+};
+
+
 // Enum TslGame.EWelcomeState
 enum class EWelcomeState
 {
@@ -1513,17 +1522,6 @@ struct FNearClippingLevelOverZ
 {
 	float                                              Z;                                                        // 0x0000(0x0004) (CPF_ZeroConstructor, CPF_IsPlainOldData)
 	unsigned char                                      UnknownData00[0x1];                                       // 0x0004(0x0001) UNKNOWN PROPERTY: EnumProperty TslGame.NearClippingLevelOverZ.Level
-};
-
-// ScriptStruct TslGame.PingPongSummary
-// 0x000C
-struct FPingPongSummary
-{
-	float                                              UnreliableAverageDelayMsec;                               // 0x0000(0x0004) (CPF_ZeroConstructor, CPF_IsPlainOldData)
-	float                                              ReliableAverageDelayMsec;                                 // 0x0004(0x0004) (CPF_ZeroConstructor, CPF_IsPlainOldData)
-	int8_t                                             UnreliableSentCount;                                      // 0x0008(0x0001) (CPF_ZeroConstructor, CPF_IsPlainOldData)
-	int8_t                                             UnreliableMissCount;                                      // 0x0009(0x0001) (CPF_ZeroConstructor, CPF_IsPlainOldData)
-	int8_t                                             ReliableCount;                                            // 0x000A(0x0001) (CPF_ZeroConstructor, CPF_IsPlainOldData)
 };
 
 // ScriptStruct TslGame.LobbyItemDesc
@@ -3327,11 +3325,12 @@ struct FTslReportUserInfo
 };
 
 // ScriptStruct TslGame.TslReportedInfo
-// 0x0048
+// 0x0058
 struct FTslReportedInfo
 {
-	struct FTslReportUserInfo                          UserInfo;                                                 // 0x0000(0x0038) (CPF_Edit, CPF_BlueprintVisible)
-	struct FString                                     Cause;                                                    // 0x0038(0x0010) (CPF_Edit, CPF_BlueprintVisible, CPF_ZeroConstructor)
+	struct FString                                     MatchId;                                                  // 0x0000(0x0010) (CPF_Edit, CPF_BlueprintVisible, CPF_ZeroConstructor)
+	struct FTslReportUserInfo                          UserInfo;                                                 // 0x0010(0x0038) (CPF_Edit, CPF_BlueprintVisible)
+	struct FString                                     Cause;                                                    // 0x0048(0x0010) (CPF_Edit, CPF_BlueprintVisible, CPF_ZeroConstructor)
 };
 
 // ScriptStruct TslGame.TslPlayerMatchResultInfo
@@ -3404,6 +3403,17 @@ struct FPlayerHitInfo
 	int                                                Hits;                                                     // 0x0000(0x0004) (CPF_ZeroConstructor, CPF_IsPlainOldData)
 	float                                              Damages;                                                  // 0x0004(0x0004) (CPF_ZeroConstructor, CPF_IsPlainOldData)
 	int                                                Kills;                                                    // 0x0008(0x0004) (CPF_ZeroConstructor, CPF_IsPlainOldData)
+};
+
+// ScriptStruct TslGame.PingPongSummary
+// 0x000C
+struct FPingPongSummary
+{
+	float                                              UnreliableAverageDelayMsec;                               // 0x0000(0x0004) (CPF_ZeroConstructor, CPF_IsPlainOldData)
+	float                                              ReliableAverageDelayMsec;                                 // 0x0004(0x0004) (CPF_ZeroConstructor, CPF_IsPlainOldData)
+	int8_t                                             UnreliableSentCount;                                      // 0x0008(0x0001) (CPF_ZeroConstructor, CPF_IsPlainOldData)
+	int8_t                                             UnreliableMissCount;                                      // 0x0009(0x0001) (CPF_ZeroConstructor, CPF_IsPlainOldData)
+	int8_t                                             ReliableCount;                                            // 0x000A(0x0001) (CPF_ZeroConstructor, CPF_IsPlainOldData)
 };
 
 // ScriptStruct TslGame.DroppedItemInfo
@@ -3613,6 +3623,37 @@ struct FWuLogCharacter
 	struct FString                                     AccountId;                                                // 0x0038(0x0010) (CPF_ZeroConstructor)
 };
 
+// ScriptStruct TslGame.WuLogHackDetection_SimilarHit
+// 0x00B0 (0x00D8 - 0x0028)
+struct FWuLogHackDetection_SimilarHit : public FLogBase
+{
+	struct FWuLogCharacter                             Character;                                                // 0x0028(0x0048)
+	struct FString                                     WeaponName;                                               // 0x0070(0x0010) (CPF_ZeroConstructor)
+	int                                                AttackId;                                                 // 0x0080(0x0004) (CPF_ZeroConstructor, CPF_IsPlainOldData)
+	class Vector3D                                     ImpactLocation;                                           // 0x0084(0x000C) (CPF_IsPlainOldData)
+	class Vector3D                                     ImpactRelativeLocation;                                   // 0x0090(0x000C) (CPF_IsPlainOldData)
+	float                                              ElapsedTime;                                              // 0x009C(0x0004) (CPF_ZeroConstructor, CPF_IsPlainOldData)
+	float                                              VictimSpeed;                                              // 0x00A0(0x0004) (CPF_ZeroConstructor, CPF_IsPlainOldData)
+	struct FString                                     VictimName;                                               // 0x00A8(0x0010) (CPF_ZeroConstructor)
+	struct FString                                     VictimNetId;                                              // 0x00B8(0x0010) (CPF_ZeroConstructor)
+	struct FString                                     VictimAccountId;                                          // 0x00C8(0x0010) (CPF_ZeroConstructor)
+};
+
+// ScriptStruct TslGame.WuLogHackDetection_Kill
+// 0x0080 (0x00A8 - 0x0028)
+struct FWuLogHackDetection_Kill : public FLogBase
+{
+	struct FWuLogCharacter                             Character;                                                // 0x0028(0x0048)
+	struct FString                                     WeaponName;                                               // 0x0070(0x0010) (CPF_ZeroConstructor)
+	struct FString                                     WeaponState;                                              // 0x0080(0x0010) (CPF_ZeroConstructor)
+	float                                              Reason_DistVictims;                                       // 0x0090(0x0004) (CPF_ZeroConstructor, CPF_IsPlainOldData)
+	float                                              Reason_DistVictim1;                                       // 0x0094(0x0004) (CPF_ZeroConstructor, CPF_IsPlainOldData)
+	float                                              Reason_DistVictim2;                                       // 0x0098(0x0004) (CPF_ZeroConstructor, CPF_IsPlainOldData)
+	float                                              Reason_DeltaYaw;                                          // 0x009C(0x0004) (CPF_ZeroConstructor, CPF_IsPlainOldData)
+	float                                              Reason_DeltaPitch;                                        // 0x00A0(0x0004) (CPF_ZeroConstructor, CPF_IsPlainOldData)
+	unsigned char                                      IsBanned : 1;                                             // 0x00A4(0x0001) (CPF_ZeroConstructor, CPF_IsPlainOldData)
+};
+
 // ScriptStruct TslGame.WuLogHackDetection_CHKSUM
 // 0x0080 (0x00A8 - 0x0028)
 struct FWuLogHackDetection_CHKSUM : public FLogBase
@@ -3687,6 +3728,38 @@ struct FWuLogHackDetection_ItemPackage : public FLogBase
 	unsigned char                                      IsBlockedHit : 1;                                         // 0x0085(0x0001) (CPF_ZeroConstructor, CPF_IsPlainOldData)
 };
 
+// ScriptStruct TslGame.WuLogHackDetection_ESP
+// 0x0060 (0x0088 - 0x0028)
+struct FWuLogHackDetection_ESP : public FLogBase
+{
+	struct FWuLogCharacter                             Character;                                                // 0x0028(0x0048)
+	struct FString                                     WeaponState;                                              // 0x0070(0x0010) (CPF_ZeroConstructor)
+	float                                              Reason_Distance;                                          // 0x0080(0x0004) (CPF_ZeroConstructor, CPF_IsPlainOldData)
+	unsigned char                                      IsBanned : 1;                                             // 0x0084(0x0001) (CPF_ZeroConstructor, CPF_IsPlainOldData)
+};
+
+// ScriptStruct TslGame.WuLogHackDetection_OddKill
+// 0x0078 (0x00A0 - 0x0028)
+struct FWuLogHackDetection_OddKill : public FLogBase
+{
+	struct FWuLogCharacter                             Character;                                                // 0x0028(0x0048)
+	struct FString                                     WeaponName;                                               // 0x0070(0x0010) (CPF_ZeroConstructor)
+	struct FString                                     WeaponState;                                              // 0x0080(0x0010) (CPF_ZeroConstructor)
+	float                                              Reason_DistVics;                                          // 0x0090(0x0004) (CPF_ZeroConstructor, CPF_IsPlainOldData)
+	float                                              Reason_DistKiller;                                        // 0x0094(0x0004) (CPF_ZeroConstructor, CPF_IsPlainOldData)
+	unsigned char                                      IsBanned : 1;                                             // 0x0098(0x0001) (CPF_ZeroConstructor, CPF_IsPlainOldData)
+};
+
+// ScriptStruct TslGame.WuLogHackDetection_Package
+// 0x0050 (0x0078 - 0x0028)
+struct FWuLogHackDetection_Package : public FLogBase
+{
+	struct FWuLogCharacter                             Character;                                                // 0x0028(0x0048)
+	float                                              Reason_Distance;                                          // 0x0070(0x0004) (CPF_ZeroConstructor, CPF_IsPlainOldData)
+	unsigned char                                      IsBanned : 1;                                             // 0x0074(0x0001) (CPF_ZeroConstructor, CPF_IsPlainOldData)
+	unsigned char                                      IsBlockedHit : 1;                                         // 0x0075(0x0001) (CPF_ZeroConstructor, CPF_IsPlainOldData)
+};
+
 // ScriptStruct TslGame.WuLogHackDetection_Common
 // 0x0060 (0x0088 - 0x0028)
 struct FWuLogHackDetection_Common : public FLogBase
@@ -3741,38 +3814,6 @@ struct FWuLogHackDetection_SpeedHack : public FLogBase
 	float                                              Reason_Ping;                                              // 0x0078(0x0004) (CPF_ZeroConstructor, CPF_IsPlainOldData)
 	int                                                Reason_MovementMode;                                      // 0x007C(0x0004) (CPF_ZeroConstructor, CPF_IsPlainOldData)
 	unsigned char                                      IsBanned : 1;                                             // 0x0080(0x0001) (CPF_ZeroConstructor, CPF_IsPlainOldData)
-};
-
-// ScriptStruct TslGame.WuLogHackDetection_ESP
-// 0x0060 (0x0088 - 0x0028)
-struct FWuLogHackDetection_ESP : public FLogBase
-{
-	struct FWuLogCharacter                             Character;                                                // 0x0028(0x0048)
-	struct FString                                     WeaponState;                                              // 0x0070(0x0010) (CPF_ZeroConstructor)
-	float                                              Reason_Distance;                                          // 0x0080(0x0004) (CPF_ZeroConstructor, CPF_IsPlainOldData)
-	unsigned char                                      IsBanned : 1;                                             // 0x0084(0x0001) (CPF_ZeroConstructor, CPF_IsPlainOldData)
-};
-
-// ScriptStruct TslGame.WuLogHackDetection_OddKill
-// 0x0078 (0x00A0 - 0x0028)
-struct FWuLogHackDetection_OddKill : public FLogBase
-{
-	struct FWuLogCharacter                             Character;                                                // 0x0028(0x0048)
-	struct FString                                     WeaponName;                                               // 0x0070(0x0010) (CPF_ZeroConstructor)
-	struct FString                                     WeaponState;                                              // 0x0080(0x0010) (CPF_ZeroConstructor)
-	float                                              Reason_DistVics;                                          // 0x0090(0x0004) (CPF_ZeroConstructor, CPF_IsPlainOldData)
-	float                                              Reason_DistKiller;                                        // 0x0094(0x0004) (CPF_ZeroConstructor, CPF_IsPlainOldData)
-	unsigned char                                      IsBanned : 1;                                             // 0x0098(0x0001) (CPF_ZeroConstructor, CPF_IsPlainOldData)
-};
-
-// ScriptStruct TslGame.WuLogHackDetection_Package
-// 0x0050 (0x0078 - 0x0028)
-struct FWuLogHackDetection_Package : public FLogBase
-{
-	struct FWuLogCharacter                             Character;                                                // 0x0028(0x0048)
-	float                                              Reason_Distance;                                          // 0x0070(0x0004) (CPF_ZeroConstructor, CPF_IsPlainOldData)
-	unsigned char                                      IsBanned : 1;                                             // 0x0074(0x0001) (CPF_ZeroConstructor, CPF_IsPlainOldData)
-	unsigned char                                      IsBlockedHit : 1;                                         // 0x0075(0x0001) (CPF_ZeroConstructor, CPF_IsPlainOldData)
 };
 
 // ScriptStruct TslGame.WuLogHackDetection_SpeedHackTime
@@ -4339,7 +4380,7 @@ struct FWuGameInitializedResult
 struct FWuStringStringPair
 {
 	struct FString                                     First;                                                    // 0x0000(0x0010) (CPF_ZeroConstructor)
-	struct FString                                     Second;                                                   // 0x0010(0x0010) (CPF_ZeroConstructor)
+	struct FString                                     second;                                                   // 0x0010(0x0010) (CPF_ZeroConstructor)
 };
 
 // ScriptStruct TslGame.WuGameStartRequest
@@ -4384,7 +4425,7 @@ struct FWuMatchRating
 struct FWuStringBoolPair
 {
 	struct FString                                     First;                                                    // 0x0000(0x0010) (CPF_ZeroConstructor)
-	unsigned char                                      Second : 1;                                               // 0x0010(0x0001) (CPF_ZeroConstructor, CPF_IsPlainOldData)
+	unsigned char                                      second : 1;                                               // 0x0010(0x0001) (CPF_ZeroConstructor, CPF_IsPlainOldData)
 };
 
 // ScriptStruct TslGame.WuStringFloatPair
@@ -4392,7 +4433,7 @@ struct FWuStringBoolPair
 struct FWuStringFloatPair
 {
 	struct FString                                     First;                                                    // 0x0000(0x0010) (CPF_ZeroConstructor)
-	float                                              Second;                                                   // 0x0010(0x0004) (CPF_ZeroConstructor, CPF_IsPlainOldData)
+	float                                              second;                                                   // 0x0010(0x0004) (CPF_ZeroConstructor, CPF_IsPlainOldData)
 };
 
 // ScriptStruct TslGame.WuCharacterCustomizationOptions

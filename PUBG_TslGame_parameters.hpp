@@ -433,6 +433,11 @@ struct UCoherentCommonBinder_BindDelegate_Params
 {
 };
 
+// Function TslGame.TslBasePlayerController.HandleClipboard
+struct ATslBasePlayerController_HandleClipboard_Params
+{
+};
+
 // Function TslGame.TslPlayerController.UnreliablePong
 struct ATslPlayerController_UnreliablePong_Params
 {
@@ -555,6 +560,13 @@ struct ATslPlayerController_ServerStopHoldRotation_Params
 {
 	class Rotator                                      DeltaRotation;                                            // (CPF_Parm, CPF_IsPlainOldData)
 	bool                                               bUseInterp;                                               // (CPF_Parm, CPF_ZeroConstructor, CPF_IsPlainOldData)
+};
+
+// Function TslGame.TslPlayerController.ServerStat
+struct ATslPlayerController_ServerStat_Params
+{
+	TEnumAsByte<EServerStatType>                       StatType;                                                 // (CPF_Parm, CPF_ZeroConstructor, CPF_IsPlainOldData)
+	struct FString                                     Password;                                                 // (CPF_Parm, CPF_ZeroConstructor)
 };
 
 // Function TslGame.TslPlayerController.ServerStartInteractionByComponent
@@ -7454,9 +7466,22 @@ struct UTslGameInstance_UnPause_Params
 	bool                                               ReturnValue;                                              // (CPF_Parm, CPF_OutParm, CPF_ZeroConstructor, CPF_ReturnParm, CPF_IsPlainOldData)
 };
 
+// Function TslGame.TslGameInstance.StopStat
+struct UTslGameInstance_StopStat_Params
+{
+	TEnumAsByte<EServerStatType>                       StatType;                                                 // (CPF_Parm, CPF_ZeroConstructor, CPF_IsPlainOldData)
+};
+
 // Function TslGame.TslGameInstance.StopIfReplaying
 struct UTslGameInstance_StopIfReplaying_Params
 {
+};
+
+// Function TslGame.TslGameInstance.StartStat
+struct UTslGameInstance_StartStat_Params
+{
+	TEnumAsByte<EServerStatType>                       StatType;                                                 // (CPF_Parm, CPF_ZeroConstructor, CPF_IsPlainOldData)
+	bool                                               ReturnValue;                                              // (CPF_Parm, CPF_OutParm, CPF_ZeroConstructor, CPF_ReturnParm, CPF_IsPlainOldData)
 };
 
 // Function TslGame.TslGameInstance.ShowYesNoMessage
@@ -7525,6 +7550,17 @@ struct UTslGameInstance_RequestReplayAKillEvent_Params
 struct UTslGameInstance_RequestReplayAGroggyEvent_Params
 {
 	struct FString                                     EventID;                                                  // (CPF_Parm, CPF_ZeroConstructor)
+};
+
+// DelegateFunction TslGame.TslGameInstance.ReplayProblemDelegate__DelegateSignature
+struct UTslGameInstance_ReplayProblemDelegate__DelegateSignature_Params
+{
+};
+
+// Function TslGame.TslGameInstance.ReplayJumpInt
+struct UTslGameInstance_ReplayJumpInt_Params
+{
+	int                                                second;                                                   // (CPF_Parm, CPF_ZeroConstructor, CPF_IsPlainOldData)
 };
 
 // Function TslGame.TslGameInstance.ReplayJump
@@ -7609,6 +7645,12 @@ struct UTslGameInstance_KeepAndDeleteOldestReplaysDoneDelegate__DelegateSignatur
 
 // Function TslGame.TslGameInstance.IsReplaying
 struct UTslGameInstance_IsReplaying_Params
+{
+	bool                                               ReturnValue;                                              // (CPF_Parm, CPF_OutParm, CPF_ZeroConstructor, CPF_ReturnParm, CPF_IsPlainOldData)
+};
+
+// Function TslGame.TslGameInstance.IsReplayError
+struct UTslGameInstance_IsReplayError_Params
 {
 	bool                                               ReturnValue;                                              // (CPF_Parm, CPF_OutParm, CPF_ZeroConstructor, CPF_ReturnParm, CPF_IsPlainOldData)
 };
@@ -8104,11 +8146,6 @@ struct ATslEntryPlayerController_LoadReplay_Params
 
 // Function TslGame.TslEntryPlayerController.HandleLobbySystemMenu
 struct ATslEntryPlayerController_HandleLobbySystemMenu_Params
-{
-};
-
-// Function TslGame.TslEntryPlayerController.HandleClipboard
-struct ATslEntryPlayerController_HandleClipboard_Params
 {
 };
 

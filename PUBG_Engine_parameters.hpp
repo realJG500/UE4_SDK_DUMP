@@ -15498,7 +15498,7 @@ struct UKismetMathLibrary_MakeDateTime_Params
 	int                                                Day;                                                      // (CPF_Parm, CPF_ZeroConstructor, CPF_IsPlainOldData)
 	int                                                Hour;                                                     // (CPF_Parm, CPF_ZeroConstructor, CPF_IsPlainOldData)
 	int                                                Minute;                                                   // (CPF_Parm, CPF_ZeroConstructor, CPF_IsPlainOldData)
-	int                                                Second;                                                   // (CPF_Parm, CPF_ZeroConstructor, CPF_IsPlainOldData)
+	int                                                second;                                                   // (CPF_Parm, CPF_ZeroConstructor, CPF_IsPlainOldData)
 	int                                                Millisecond;                                              // (CPF_Parm, CPF_ZeroConstructor, CPF_IsPlainOldData)
 	struct FDateTime                                   ReturnValue;                                              // (CPF_Parm, CPF_OutParm, CPF_ReturnParm)
 };
@@ -16962,7 +16962,7 @@ struct UKismetMathLibrary_BreakDateTime_Params
 	int                                                Day;                                                      // (CPF_Parm, CPF_OutParm, CPF_ZeroConstructor, CPF_IsPlainOldData)
 	int                                                Hour;                                                     // (CPF_Parm, CPF_OutParm, CPF_ZeroConstructor, CPF_IsPlainOldData)
 	int                                                Minute;                                                   // (CPF_Parm, CPF_OutParm, CPF_ZeroConstructor, CPF_IsPlainOldData)
-	int                                                Second;                                                   // (CPF_Parm, CPF_OutParm, CPF_ZeroConstructor, CPF_IsPlainOldData)
+	int                                                second;                                                   // (CPF_Parm, CPF_OutParm, CPF_ZeroConstructor, CPF_IsPlainOldData)
 	int                                                Millisecond;                                              // (CPF_Parm, CPF_OutParm, CPF_ZeroConstructor, CPF_IsPlainOldData)
 };
 

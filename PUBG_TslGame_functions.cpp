@@ -1484,6 +1484,24 @@ void UCoherentCommonBinder::BindDelegate()
 }
 
 
+// Function TslGame.TslBasePlayerController.HandleClipboard
+// (FUNC_Native, FUNC_Protected)
+
+void ATslBasePlayerController::HandleClipboard()
+{
+	static auto fn = UObject::FindObject<UFunction>("Function TslGame.TslBasePlayerController.HandleClipboard");
+
+	ATslBasePlayerController_HandleClipboard_Params params;
+
+	auto flags = fn->FunctionFlags;
+	fn->FunctionFlags |= 0x400;
+
+	UObject::ProcessEvent(fn, &params);
+
+	fn->FunctionFlags = flags;
+}
+
+
 // Function TslGame.TslPlayerController.UnreliablePong
 // (FUNC_Final, FUNC_Net, FUNC_Native, FUNC_Event, FUNC_Private, FUNC_NetServer, FUNC_NetValidate)
 // Parameters:
@@ -1900,6 +1918,29 @@ void ATslPlayerController::ServerStopHoldRotation(const class Rotator& DeltaRota
 	ATslPlayerController_ServerStopHoldRotation_Params params;
 	params.DeltaRotation = DeltaRotation;
 	params.bUseInterp = bUseInterp;
+
+	auto flags = fn->FunctionFlags;
+	fn->FunctionFlags |= 0x400;
+
+	UObject::ProcessEvent(fn, &params);
+
+	fn->FunctionFlags = flags;
+}
+
+
+// Function TslGame.TslPlayerController.ServerStat
+// (FUNC_Final, FUNC_Net, FUNC_NetReliable, FUNC_Native, FUNC_Event, FUNC_Private, FUNC_NetServer, FUNC_NetValidate)
+// Parameters:
+// TEnumAsByte<EServerStatType>   StatType                       (CPF_Parm, CPF_ZeroConstructor, CPF_IsPlainOldData)
+// struct FString                 Password                       (CPF_Parm, CPF_ZeroConstructor)
+
+void ATslPlayerController::ServerStat(TEnumAsByte<EServerStatType> StatType, const struct FString& Password)
+{
+	static auto fn = UObject::FindObject<UFunction>("Function TslGame.TslPlayerController.ServerStat");
+
+	ATslPlayerController_ServerStat_Params params;
+	params.StatType = StatType;
+	params.Password = Password;
 
 	auto flags = fn->FunctionFlags;
 	fn->FunctionFlags |= 0x400;
@@ -26159,6 +26200,27 @@ bool UTslGameInstance::UnPause()
 }
 
 
+// Function TslGame.TslGameInstance.StopStat
+// (FUNC_Final, FUNC_Native, FUNC_Private)
+// Parameters:
+// TEnumAsByte<EServerStatType>   StatType                       (CPF_Parm, CPF_ZeroConstructor, CPF_IsPlainOldData)
+
+void UTslGameInstance::StopStat(TEnumAsByte<EServerStatType> StatType)
+{
+	static auto fn = UObject::FindObject<UFunction>("Function TslGame.TslGameInstance.StopStat");
+
+	UTslGameInstance_StopStat_Params params;
+	params.StatType = StatType;
+
+	auto flags = fn->FunctionFlags;
+	fn->FunctionFlags |= 0x400;
+
+	UObject::ProcessEvent(fn, &params);
+
+	fn->FunctionFlags = flags;
+}
+
+
 // Function TslGame.TslGameInstance.StopIfReplaying
 // (FUNC_Final, FUNC_Native, FUNC_Public, FUNC_BlueprintCallable)
 
@@ -26174,6 +26236,30 @@ void UTslGameInstance::StopIfReplaying()
 	UObject::ProcessEvent(fn, &params);
 
 	fn->FunctionFlags = flags;
+}
+
+
+// Function TslGame.TslGameInstance.StartStat
+// (FUNC_Final, FUNC_Native, FUNC_Private)
+// Parameters:
+// TEnumAsByte<EServerStatType>   StatType                       (CPF_Parm, CPF_ZeroConstructor, CPF_IsPlainOldData)
+// bool                           ReturnValue                    (CPF_Parm, CPF_OutParm, CPF_ZeroConstructor, CPF_ReturnParm, CPF_IsPlainOldData)
+
+bool UTslGameInstance::StartStat(TEnumAsByte<EServerStatType> StatType)
+{
+	static auto fn = UObject::FindObject<UFunction>("Function TslGame.TslGameInstance.StartStat");
+
+	UTslGameInstance_StartStat_Params params;
+	params.StatType = StatType;
+
+	auto flags = fn->FunctionFlags;
+	fn->FunctionFlags |= 0x400;
+
+	UObject::ProcessEvent(fn, &params);
+
+	fn->FunctionFlags = flags;
+
+	return params.ReturnValue;
 }
 
 
@@ -26401,6 +26487,44 @@ void UTslGameInstance::RequestReplayAGroggyEvent(const struct FString& EventID)
 
 	UTslGameInstance_RequestReplayAGroggyEvent_Params params;
 	params.EventID = EventID;
+
+	auto flags = fn->FunctionFlags;
+	fn->FunctionFlags |= 0x400;
+
+	UObject::ProcessEvent(fn, &params);
+
+	fn->FunctionFlags = flags;
+}
+
+
+// DelegateFunction TslGame.TslGameInstance.ReplayProblemDelegate__DelegateSignature
+// (FUNC_MulticastDelegate, FUNC_Public, FUNC_Delegate)
+
+void UTslGameInstance::ReplayProblemDelegate__DelegateSignature()
+{
+	static auto fn = UObject::FindObject<UFunction>("DelegateFunction TslGame.TslGameInstance.ReplayProblemDelegate__DelegateSignature");
+
+	UTslGameInstance_ReplayProblemDelegate__DelegateSignature_Params params;
+
+	auto flags = fn->FunctionFlags;
+
+	UObject::ProcessEvent(fn, &params);
+
+	fn->FunctionFlags = flags;
+}
+
+
+// Function TslGame.TslGameInstance.ReplayJumpInt
+// (FUNC_Final, FUNC_Native, FUNC_Public, FUNC_BlueprintCallable)
+// Parameters:
+// int                            second                         (CPF_Parm, CPF_ZeroConstructor, CPF_IsPlainOldData)
+
+void UTslGameInstance::ReplayJumpInt(int second)
+{
+	static auto fn = UObject::FindObject<UFunction>("Function TslGame.TslGameInstance.ReplayJumpInt");
+
+	UTslGameInstance_ReplayJumpInt_Params params;
+	params.second = second;
 
 	auto flags = fn->FunctionFlags;
 	fn->FunctionFlags |= 0x400;
@@ -26700,6 +26824,28 @@ bool UTslGameInstance::IsReplaying()
 	static auto fn = UObject::FindObject<UFunction>("Function TslGame.TslGameInstance.IsReplaying");
 
 	UTslGameInstance_IsReplaying_Params params;
+
+	auto flags = fn->FunctionFlags;
+	fn->FunctionFlags |= 0x400;
+
+	UObject::ProcessEvent(fn, &params);
+
+	fn->FunctionFlags = flags;
+
+	return params.ReturnValue;
+}
+
+
+// Function TslGame.TslGameInstance.IsReplayError
+// (FUNC_Native, FUNC_Public, FUNC_BlueprintCallable)
+// Parameters:
+// bool                           ReturnValue                    (CPF_Parm, CPF_OutParm, CPF_ZeroConstructor, CPF_ReturnParm, CPF_IsPlainOldData)
+
+bool UTslGameInstance::IsReplayError()
+{
+	static auto fn = UObject::FindObject<UFunction>("Function TslGame.TslGameInstance.IsReplayError");
+
+	UTslGameInstance_IsReplayError_Params params;
 
 	auto flags = fn->FunctionFlags;
 	fn->FunctionFlags |= 0x400;
@@ -28428,24 +28574,6 @@ void ATslEntryPlayerController::HandleLobbySystemMenu()
 	static auto fn = UObject::FindObject<UFunction>("Function TslGame.TslEntryPlayerController.HandleLobbySystemMenu");
 
 	ATslEntryPlayerController_HandleLobbySystemMenu_Params params;
-
-	auto flags = fn->FunctionFlags;
-	fn->FunctionFlags |= 0x400;
-
-	UObject::ProcessEvent(fn, &params);
-
-	fn->FunctionFlags = flags;
-}
-
-
-// Function TslGame.TslEntryPlayerController.HandleClipboard
-// (FUNC_Final, FUNC_Native, FUNC_Private)
-
-void ATslEntryPlayerController::HandleClipboard()
-{
-	static auto fn = UObject::FindObject<UFunction>("Function TslGame.TslEntryPlayerController.HandleClipboard");
-
-	ATslEntryPlayerController_HandleClipboard_Params params;
 
 	auto flags = fn->FunctionFlags;
 	fn->FunctionFlags |= 0x400;

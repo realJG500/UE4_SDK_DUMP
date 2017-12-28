@@ -27,8 +27,8 @@ public:
 	}
 
 
-	void UpdateSkeletalMeshAsync(bool bForceReuseResources);
-	void UpdateSkeletalMesh(bool bForceReuseResources);
+	void UpdateSkeletalMeshAsync();
+	void UpdateSkeletalMesh();
 };
 
 

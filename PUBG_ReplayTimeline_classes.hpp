@@ -113,6 +113,7 @@ public:
 	void BndEvt__BtnStop_K2Node_ComponentBoundEvent_35_OnButtonClickedEvent__DelegateSignature();
 	void OnGoToTimelineDoneToFindKillerOrVictim();
 	void OnGoToTimelineDoneToFindCharacter();
+	void O_1();
 	void ExecuteUbergraph_ReplayTimeline(int EntryPoint);
 };
 

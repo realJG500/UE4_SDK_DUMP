@@ -4545,13 +4545,14 @@ public:
 	float                                              ClientErrorUpdateRateLimit;                               // 0x0410(0x0004) (CPF_ZeroConstructor, CPF_Config, CPF_GlobalConfig, CPF_IsPlainOldData)
 	unsigned char                                      bMovementTimeDiscrepancyDetection : 1;                    // 0x0414(0x0001) (CPF_ZeroConstructor, CPF_Config, CPF_GlobalConfig, CPF_IsPlainOldData)
 	unsigned char                                      bMovementTimeDiscrepancyResolution : 1;                   // 0x0415(0x0001) (CPF_ZeroConstructor, CPF_Config, CPF_GlobalConfig, CPF_IsPlainOldData)
-	float                                              MovementTimeDiscrepancyMaxTimeMargin;                     // 0x0418(0x0004) (CPF_ZeroConstructor, CPF_Config, CPF_GlobalConfig, CPF_IsPlainOldData)
-	float                                              MovementTimeDiscrepancyMinTimeMargin;                     // 0x041C(0x0004) (CPF_ZeroConstructor, CPF_Config, CPF_GlobalConfig, CPF_IsPlainOldData)
-	float                                              MovementTimeDiscrepancyResolutionRate;                    // 0x0420(0x0004) (CPF_ZeroConstructor, CPF_Config, CPF_GlobalConfig, CPF_IsPlainOldData)
-	float                                              MovementTimeDiscrepancyDriftAllowance;                    // 0x0424(0x0004) (CPF_ZeroConstructor, CPF_Config, CPF_GlobalConfig, CPF_IsPlainOldData)
-	unsigned char                                      bMovementTimeDiscrepancyForceCorrectionsDuringResolution : 1;// 0x0428(0x0001) (CPF_ZeroConstructor, CPF_Config, CPF_GlobalConfig, CPF_IsPlainOldData)
-	unsigned char                                      bUseDistanceBasedRelevancy : 1;                           // 0x0429(0x0001) (CPF_ZeroConstructor, CPF_Config, CPF_GlobalConfig, CPF_IsPlainOldData)
-	unsigned char                                      UnknownData00[0xE];                                       // 0x042A(0x000E) MISSED OFFSET
+	float                                              MovementTimeDiscrepancyResolutionMinFPS;                  // 0x0418(0x0004) (CPF_ZeroConstructor, CPF_Config, CPF_GlobalConfig, CPF_IsPlainOldData)
+	float                                              MovementTimeDiscrepancyMaxTimeMargin;                     // 0x041C(0x0004) (CPF_ZeroConstructor, CPF_Config, CPF_GlobalConfig, CPF_IsPlainOldData)
+	float                                              MovementTimeDiscrepancyMinTimeMargin;                     // 0x0420(0x0004) (CPF_ZeroConstructor, CPF_Config, CPF_GlobalConfig, CPF_IsPlainOldData)
+	float                                              MovementTimeDiscrepancyResolutionRate;                    // 0x0424(0x0004) (CPF_ZeroConstructor, CPF_Config, CPF_GlobalConfig, CPF_IsPlainOldData)
+	float                                              MovementTimeDiscrepancyDriftAllowance;                    // 0x0428(0x0004) (CPF_ZeroConstructor, CPF_Config, CPF_GlobalConfig, CPF_IsPlainOldData)
+	unsigned char                                      bMovementTimeDiscrepancyForceCorrectionsDuringResolution : 1;// 0x042C(0x0001) (CPF_ZeroConstructor, CPF_Config, CPF_GlobalConfig, CPF_IsPlainOldData)
+	unsigned char                                      bUseDistanceBasedRelevancy : 1;                           // 0x042D(0x0001) (CPF_ZeroConstructor, CPF_Config, CPF_GlobalConfig, CPF_IsPlainOldData)
+	unsigned char                                      UnknownData00[0xA];                                       // 0x042E(0x000A) MISSED OFFSET
 
 	static UClass* StaticClass()
 	{
@@ -9400,7 +9401,7 @@ public:
 	struct FRandomStream STATIC_MakeRandomStream(int InitialSeed);
 	float STATIC_MakePulsatingValue(float InCurrentTime, float InPulsesPerSecond, float InPhase);
 	struct FPlane STATIC_MakePlaneFromPointAndNormal(const class Vector3D& Point, const class Vector3D& Normal);
-	struct FDateTime STATIC_MakeDateTime(int Year, int Month, int Day, int Hour, int Minute, int Second, int Millisecond);
+	struct FDateTime STATIC_MakeDateTime(int Year, int Month, int Day, int Hour, int Minute, int second, int Millisecond);
 	struct FLinearColor STATIC_MakeColor(float R, float G, float B, float A);
 	struct FBox2D STATIC_MakeBox2D(const class Vector2D& Min, const class Vector2D& Max);
 	struct FBox STATIC_MakeBox(const class Vector3D& Min, const class Vector3D& Max);
@@ -9585,7 +9586,7 @@ public:
 	void STATIC_BreakRotIntoAxes(const class Rotator& InRot, class Vector3D* X, class Vector3D* Y, class Vector3D* Z);
 	void STATIC_BreakRotator(const class Rotator& InRot, float* Roll, float* Pitch, float* Yaw);
 	void STATIC_BreakRandomStream(const struct FRandomStream& InRandomStream, int* InitialSeed);
-	void STATIC_BreakDateTime(const struct FDateTime& InDateTime, int* Year, int* Month, int* Day, int* Hour, int* Minute, int* Second, int* Millisecond);
+	void STATIC_BreakDateTime(const struct FDateTime& InDateTime, int* Year, int* Month, int* Day, int* Hour, int* Minute, int* second, int* Millisecond);
 	void STATIC_BreakColor(const struct FLinearColor& InColor, float* R, float* G, float* B, float* A);
 	bool STATIC_BooleanXOR(bool A, bool B);
 	bool STATIC_BooleanOR(bool A, bool B);
